@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 
 class SNode {
 public:
@@ -12,6 +14,7 @@ public:
 		head = nullptr;
 	}
 
+	//Add to the front of a linked list.
 	void addFront(int x) {
 		SNode *tmp = head;
 		head = new SNode;
@@ -19,20 +22,38 @@ public:
 		head->elem = x;
 	}
 
-	SNode* insertAtRecurse(SNode *ptr, SNode *prev, int i, int j, int x) {
-		if (i >= j) {
-			SNode *insert = new SNode;
-			prev = insert;
-			insert = ptr;
-			insert->elem = x;
+	//Insert a node in a linked list recursively.
+	SNode* insertAtRecurse(SNode* ptr, SNode* prev, int n, int elem) {
+		if (n <= 1) {
+			if (prev == nullptr) {
+				addFront(elem);
+				return nullptr;
+			}
+
+			SNode* insert = new SNode;
+			insert->elem = elem;
+			prev->next = insert;
+			insert->next = ptr;
 			return nullptr;
 		}
 		else {
-			SNode *prev = ptr;
-			i++;
-			return insertAtRecurse(ptr->next, prev, i, j, x);
-		}
+			prev = ptr;
+			ptr = ptr->next;
+			n--;
+			return insertAtRecurse(ptr, prev, n, elem);
+		}	
 	}
+
+	//Print list.
+	void print() {
+		SNode* ptr = head;
+		while (ptr != nullptr) {
+			cout << ptr->elem << " ";
+			ptr = ptr->next;
+		}
+		cout << endl;
+	}
+
 	SNode *head;
 };
 

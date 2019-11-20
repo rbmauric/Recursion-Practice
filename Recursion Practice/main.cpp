@@ -12,11 +12,8 @@ using namespace std;
 string reverse(string str, int n, int m) {
 	string reversed = str;
 	
-	if (m == 0 || m <= n) {
-		cout << "The reversed string is " << reversed << ". \n";
+	if (m == 0 || m <= n) 
 		return reversed;
-	}
-
 	else {
 		reversed[n] = str[m];
 		reversed[m] = str[n];
@@ -26,6 +23,7 @@ string reverse(string str, int n, int m) {
 	}
 }
 
+//See if a string is a palindrome recursively.
 string palindrome(string pal, int i, int j) {	
 	string newpal = pal;
 
@@ -54,23 +52,28 @@ string palindrome(string pal, int i, int j) {
 int main() {
 	string test = "Buttery";
 	string reversed = " ";
-	int testint = 100;
+	int testint = 110011;
 
-	reversed = reverse(test, 0, test.size()-1);
+	cout << "Initial string: " << test << endl;
+	cout << "Reversed string: " << reverse(test, 0, test.size() - 1) << endl;
+	cout << endl;
 
 	test = to_string(testint);
-	
+	cout << "Testing palindrome for int: " << testint << endl;
 	palindrome(test, 0, test.size() - 1);
+	cout << endl;
 
 	SLL list;
 	
+	cout << "Inserting list elements... \n";
 	list.addFront(1);
 	list.addFront(2);
 	list.addFront(3);
 	list.addFront(5);
 
-	list.insertAtRecurse(list.head, nullptr, 0, 4, 4);
-
+	list.insertAtRecurse(list.head, nullptr, 2, 4);
+	cout << "Printing list: ";
+	list.print();
 
 	return 0;
 }
